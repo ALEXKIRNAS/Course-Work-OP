@@ -34,7 +34,14 @@ int det(int** matrix, int n){
 *		алгебраїний мінор				  *
 ******************************************/
 int AlgebralAdditionCalc(int** matrix, const int& n, const int& y) {
-	return det(matrixCut(matrix, n, y), n - 1) * ( y&1 ? -1 : 1);
+	int** mas = matrixCut(matrix, n, y);
+	int ans = det(mas, n - 1) * (y & 1 ? -1 : 1); // Змінна для збереження відповіді
+
+	// Очищаємо память
+	for (int i = 0; i < n - 1; i++) delete[] mas[i];
+	delete[] mas;
+
+	return ans;
 }
 
 /******************************************

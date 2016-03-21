@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <conio.h>
 
 int main(void) {
+	freopen("input.txt", "r", stdin);
 	int n;
 
 	scanf("%d", &n);
@@ -18,5 +20,4 @@ int main(void) {
 	printf("Determine: %d", det(matrix, n));
 	clocks = clock() - clocks;
 	printf("\nRuntime: %d\n", clocks);
-	system("pause");
 }
