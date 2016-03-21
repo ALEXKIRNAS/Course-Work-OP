@@ -21,7 +21,7 @@ int det(const int** matrix, int n){
 
 /******************************************
 *		Функція обчислення алгебраїчного  *
-*		мінору заданого елементу		  *
+*		доповнення заданого елементу	  *
 *	Параметри:							  *
 *	matrix - матриця для якої потірбно	  *
 *		  алгебраїний мінор				  *
@@ -30,7 +30,37 @@ int det(const int** matrix, int n){
 *		якого потрібно порахувати		  *
 *		алгебраїний мінор				  *
 ******************************************/
-int AlgebralMinorCalc(const int const** matrix, const int& n, const int& y) {
-	return det(matrixCut(matrix, n, y), n - 1);
+int AlgebralAdditionCalc(const int const** matrix, const int& n, const int& y) {
+	return det(matrixCut(matrix, n, y), n - 1) * ( y&1 ? -1 : 1);
 }
-int AlgebralAdditionCalc(const int const**, const int&, const int&); // Обчислення алгебраїного доповнення заданого елементу
+
+/******************************************
+*		Функція  уворення матриці		  *
+*		(N-1)-го порядку				  *
+*	Параметри:							  *
+*	matrix - матриця для якої потірбно	  *
+*		  алгебраїний мінор				  *
+*	n - розмірність матриці				  *
+*	y - номер стовпця елемента, для		  *
+*		якого потрібно порахувати		  *
+*		алгебраїний мінор				  *
+******************************************/
+int** matrixCut(const int** matrix, const int& n, const int& y) {
+
+	// Cтворюємо нову матрицю
+	int** newMatrix = new int*[n - 1];
+	for (int i = 0; i < n - 1; i++) newMatrix[i] = new int[n - 1];
+
+	int index = 0; // Абсолютний індекс елемента в матриці newMatrix
+
+	// Заповнюємо матрицю
+	for (int i = 1; i < n; i++)
+		for (int z = 0; z < n; z++)
+			if (z == y) continue;
+			else {
+				newMatrix[index / (n - 1)][index % (n - 1)] = matrix[i][z];
+				index++;
+			}
+
+	return newMatrix;
+}
