@@ -7,16 +7,19 @@
 *		  порахувати визначник			  *
 *	n - розмірність матриці				  *
 ******************************************/
-int det(const int** matrix, int n){
+int det(int** matrix, int n){
 	int determine = 0; // Визначник матриці matrix
 
 	// Якщо розмірність матриці відмінна від одиниці
 	if (n != 1) {
 		// То, обчислюємо визначник розкладном за першим стовпцем (як сума алгебраїчних доповнень до 1-го рядка)
-		for (int z = 0; z < n; z++) determine += AlgebralAdditionCalc(matrix, n, z);
+		for (int z = 0; z < n; z++) 
+			determine += AlgebralAdditionCalc(matrix, n, z) * matrix[0][z];
 	}
 	// Інакше повернути визначник матриці 1х1
-	else return matrix[0][0];
+	else return **matrix;
+
+	return determine;
 }
 
 /******************************************
@@ -30,7 +33,7 @@ int det(const int** matrix, int n){
 *		якого потрібно порахувати		  *
 *		алгебраїний мінор				  *
 ******************************************/
-int AlgebralAdditionCalc(const int const** matrix, const int& n, const int& y) {
+int AlgebralAdditionCalc(int** matrix, const int& n, const int& y) {
 	return det(matrixCut(matrix, n, y), n - 1) * ( y&1 ? -1 : 1);
 }
 
@@ -45,7 +48,7 @@ int AlgebralAdditionCalc(const int const** matrix, const int& n, const int& y) {
 *		якого потрібно порахувати		  *
 *		алгебраїний мінор				  *
 ******************************************/
-int** matrixCut(const int** matrix, const int& n, const int& y) {
+int** matrixCut(int** matrix, const int& n, const int& y) {
 
 	// Cтворюємо нову матрицю
 	int** newMatrix = new int*[n - 1];
