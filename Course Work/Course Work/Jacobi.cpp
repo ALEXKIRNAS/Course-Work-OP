@@ -41,27 +41,33 @@ void deleteDiagZero(double** matrix, const int& n) {
 *	ѕараметри:							  *
 *	matrix - матриц€ дл€ €коњ пот≥рбно	  *
 *		  перев≥рити сходим≥сть 		  *
+*	free - стовпець в≥льних член≥в		  *
 *	n - розм≥рн≥сть матриц≥				  *
 ******************************************/
-bool isSolution(double** matrix, const int& n) {
+bool isSolution(double** matrix, double* free, const int& n) {
 	// якщо матриц€ —Ћј– вироджена
 	if (det(matrix, n) == 0) return false;
 
 	// «нищуЇмо д≥агонал≥ нул≥
 	deleteDiagZero(matrix, n);
 
-
-	// —творенн€ матриц≥ перев≥рки сходимост≥ методу якоб≥
-	double** B = new double*[n];
-	for (int i = 0; i < n; i++) B[i] = new double[n];
-
-	for (int i = 0; i < n; i++)
-		for (int z = 0; z < n; z++)
-			if (i == z) B[i][z] = 0;
-			else B[i][z] = matrix[i][z] / matrix[i][i];
+	// TODO
+	for (int i = 0; i < n; i++) {
+		double x = matrix[i][i];
+		for (int z = 0; z < n; z++) matrix[i][z] /= x;
+		free[i] /= x;
+	}
 
 	// ѕерев≥рка на сходим≥сть метода якоб≥
-	if (abs(det(B, n)) < 1) return true;
+	double norm = 0;
+	for (int i = 0; i < n; i++) {
+		double Tnorm = 0;
+		for (int z = 0; z < n; z++)
+			if (i != z) Tnorm += abs(matrix[i][z]);
+		if (norm < Tnorm) norm = Tnorm;
+	}
+
+	if (norm < 1.0f) return true;
 	else return false;
 }
 

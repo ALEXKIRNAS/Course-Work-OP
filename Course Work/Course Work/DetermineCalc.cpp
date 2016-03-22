@@ -59,7 +59,7 @@ double** matrixCut(double** matrix, const int& n, const int& y) {
 
 	// Cтворюємо нову матрицю
 	double** newMatrix = new double*[n - 1];
-	for (int i = 0; i < n - 1; i++) newMatrix[i] = new int[n - 1];
+	for (int i = 0; i < n - 1; i++) newMatrix[i] = new double[n - 1];
 
 	int index = 0; // Абсолютний індекс елемента в матриці newMatrix
 
