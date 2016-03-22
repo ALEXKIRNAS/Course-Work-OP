@@ -44,31 +44,21 @@ void deleteDiagZero(double** matrix, const int& n) {
 *	free - стовпець в≥льних член≥в		  *
 *	n - розм≥рн≥сть матриц≥				  *
 ******************************************/
-bool isSolution(double** matrix, double* free, const int& n) {
+bool isSolution(double** matrix, const int& n) {
 	// якщо матриц€ —Ћј– вироджена
 	if (det(matrix, n) == 0) return false;
 
 	// «нищуЇмо д≥агонал≥ нул≥
 	deleteDiagZero(matrix, n);
 
-	// TODO
-	for (int i = 0; i < n; i++) {
-		double x = matrix[i][i];
-		for (int z = 0; z < n; z++) matrix[i][z] /= x;
-		free[i] /= x;
-	}
-
 	// ѕерев≥рка на сходим≥сть метода якоб≥
-	double norm = 0;
 	for (int i = 0; i < n; i++) {
-		double Tnorm = 0;
-		for (int z = 0; z < n; z++)
-			if (i != z) Tnorm += abs(matrix[i][z]);
-		if (norm < Tnorm) norm = Tnorm;
+		double sum = 0;
+		for (int z = 0; z < n; z++) sum += abs(matrix[i][z]);
+		if (sum >= 2 * abs(matrix[i][i])) return false;
 	}
 
-	if (norm < 1.0f) return true;
-	else return false;
+	return true;
 }
 
 /******************************************

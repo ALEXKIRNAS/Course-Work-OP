@@ -24,7 +24,7 @@ int main(void) {
 
 	printf("Determine: %Lf\n", det(matrix, n));
 
-	if (isSolution(matrix, free, n) == false) printf("No solution!");
+	if (isSolution(matrix, n) == false) printf("No solution!");
 	else for (int i = 0; i < n; i++) {
 		x = Jacobi(matrix, free, n);
 		printf("Solution: %Lf ", x[i]);
