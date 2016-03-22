@@ -7,8 +7,8 @@
 *		  порахувати визначник			  *
 *	n - розмірність матриці				  *
 ******************************************/
-int det(int** matrix, int n){
-	int determine = 0; // Визначник матриці matrix
+double det(double** matrix, int n){
+	double determine = 0; // Визначник матриці matrix
 
 	// Якщо розмірність матриці відмінна від одиниці
 	if (n != 1) {
@@ -33,8 +33,8 @@ int det(int** matrix, int n){
 *		якого потрібно порахувати		  *
 *		алгебраїний мінор				  *
 ******************************************/
-int AlgebralAdditionCalc(int** matrix, const int& n, const int& y) {
-	int** mas = matrixCut(matrix, n, y);
+double AlgebralAdditionCalc(double** matrix, const int& n, const int& y) {
+	double** mas = matrixCut(matrix, n, y);
 	int ans = det(mas, n - 1) * (y & 1 ? -1 : 1); // Змінна для збереження відповіді
 
 	// Очищаємо память
@@ -55,10 +55,10 @@ int AlgebralAdditionCalc(int** matrix, const int& n, const int& y) {
 *		якого потрібно порахувати		  *
 *		алгебраїний мінор				  *
 ******************************************/
-int** matrixCut(int** matrix, const int& n, const int& y) {
+double** matrixCut(double** matrix, const int& n, const int& y) {
 
 	// Cтворюємо нову матрицю
-	int** newMatrix = new int*[n - 1];
+	double** newMatrix = new double*[n - 1];
 	for (int i = 0; i < n - 1; i++) newMatrix[i] = new int[n - 1];
 
 	int index = 0; // Абсолютний індекс елемента в матриці newMatrix

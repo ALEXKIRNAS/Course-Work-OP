@@ -21,9 +21,15 @@
     <ClCompile Include="DetermineCalc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Jacobi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DetermineCalc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Jacobi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
