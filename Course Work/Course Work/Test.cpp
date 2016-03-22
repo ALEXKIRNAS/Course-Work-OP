@@ -1,9 +1,12 @@
 #include "DetermineCalc.h"
 #include "Jacobi.h"
+#include "Gauss–Seidel.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include <conio.h>
+
+extern const double eps = 1e-5; // Наближення з яким шукаються корні
 
 int main(void) {
 	//freopen("input.txt", "r", stdin);
@@ -24,10 +27,21 @@ int main(void) {
 
 	printf("Determine: %Lf\n", det(matrix, n));
 
+	printf("Jakibi method:\n");
 	if (isSolution(matrix, n) == false) printf("No solution!");
-	else for (int i = 0; i < n; i++) {
+	else {
 		x = Jacobi(matrix, free, n);
-		printf("Solution: %Lf ", x[i]);
+		for (int i = 0; i < n; i++)
+			printf("Solution: %Lf ", x[i]);
+	}
+	
+
+	printf("\n\nGauss-Seidel method:\n");
+	if (isSolution(matrix, n) == false) printf("No solution!");
+	else {
+		x = GaussSeidel(matrix, free, n);
+		for (int i = 0; i < n; i++)
+			printf("Solution: %Lf ", x[i]);
 	}
 
 	clocks = clock() - clocks;

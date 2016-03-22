@@ -1,8 +1,9 @@
 #include "DetermineCalc.h"
 #include "Jacobi.h"
 #include <cmath>
+#include <stdio.h>
 
-const double eps = 1e-5; // Точність обчислення
+extern const double eps; // Точність обчислення
 
 /******************************************
 *		Функція обчислення матриці на	  *
@@ -70,6 +71,8 @@ bool isSolution(double** matrix, const int& n) {
 *	n - розмірність матриці				  *
 ******************************************/
 double* Jacobi(double** matrix, double* free, const int& n) {
+	int iter = 0;
+
 	double* X = new double[n]; // Масив, що містить розвязок СЛАР
 	double* TempX = new double[n]; // Наступне наближення
 	//Попереднє наближення розвязку
@@ -89,7 +92,10 @@ double* Jacobi(double** matrix, double* free, const int& n) {
 		norm = matrixNorm(X, TempX, n);
 		for (int i = 0; i < n; i++) X[i] = TempX[i];
 
+		iter++;
 	} while (norm > eps);
+
+	printf("Iter - %d\n", iter);
 
 	delete [] TempX;
 	return X;

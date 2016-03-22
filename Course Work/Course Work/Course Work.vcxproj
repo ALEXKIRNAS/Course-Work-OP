@@ -147,11 +147,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DetermineCalc.cpp" />
+    <ClCompile Include="Gauss–Seidel.cpp" />
     <ClCompile Include="Jacobi.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DetermineCalc.h" />
+    <ClInclude Include="Gauss–Seidel.h" />
     <ClInclude Include="Jacobi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
