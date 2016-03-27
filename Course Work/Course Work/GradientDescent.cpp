@@ -84,7 +84,7 @@ double* GradientDescent(double** matrix, double* free, const int& n) {
 		double p1 = 0; // —кал€рний добуток вектор≥в (r, r)
 		double p2 = 0; // Cкал€рний добуток вектор≥в (A*z, z)
 
-		for (int i = 0; i<n; i++) alpha += r[i] * r[i];
+		for (int i = 0; i<n; i++) p1 += r[i] * r[i];
 		for (int i = 0; i<n; i++) {
 			double temp = 0;
 			for (int j = 0; j<n; j++) temp += matrix[i][j] * z[j];
@@ -115,8 +115,10 @@ double* GradientDescent(double** matrix, double* free, const int& n) {
 			p4 += r[i] * r[i];
 		}
 
+		beta = p3 / p4;
+
 		// Step FIVE
-		for (int i = 0; i<n; i++) zk[i] = z[i] + beta*z[i];
+		for (int i = 0; i<n; i++) zk[i] = rk[i] + beta*z[i];
 
 	} while (matrixNorm(x, xk, n) > eps);
 
