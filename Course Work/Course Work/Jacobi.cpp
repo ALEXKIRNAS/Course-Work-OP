@@ -50,7 +50,8 @@ bool isSolution(double** matrix, const int& n) {
 	if (det(matrix, n) == 0) return false;
 
 	// Знищуємо діагоналі нулі
-	deleteDiagZero(matrix, n);
+	//deleteDiagZero(matrix, n);
+	stableMatrix(matrix, n);
 
 	// Перевірка на сходимість метода Якобі
 	for (int i = 0; i < n; i++) {
@@ -115,4 +116,40 @@ double matrixNorm(double* X, double* TempX, const int& n) {
 		if (abs(X[i] - TempX[i]) > norm) norm = abs(X[i] - TempX[i]);
 
 	return norm;
+}
+
+
+/******************************************
+*		Функція стабілізації матриці	  *
+*		відносно головної діагоналі		  *
+*	Параметри:							  *
+*	matrix - матриця для якої потірбно	  *
+*		  обчислити нову матрицю		  *
+*	n - розмірність матриці				  *
+******************************************/
+void stableMatrix(double** matrix, const int& n) {
+	int* mas = new int[n]; // Масив який вказує на якому рядку було замічено діагональний перевіс
+	for (int i = 0; i < n; i++) mas[i] = 0;
+
+	for (int i = 0; i < n; i++) {
+		double sum = 0;
+		int index = 0;
+		for (int z = 0; z < n; z++) {
+			sum += matrix[i][z];
+			if (matrix[i][z] > matrix[i][index]) index = z;
+		}
+
+		if (sum - 2 * matrix[i][index] < 0)
+			if (mas[index] != 0) {
+				delete[] mas;
+				return;
+			}
+			else mas[index] = i + 1;
+	}
+
+	double** nMatrix = new double*[n];
+	for (int i = 0; i < n; i++) nMatrix[i] = matrix[mas[i] - 1];
+	
+	delete[] matrix;
+	matrix = nMatrix;
 }

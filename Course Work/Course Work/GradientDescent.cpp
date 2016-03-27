@@ -122,5 +122,11 @@ double* GradientDescent(double** matrix, double* free, const int& n) {
 
 	} while (matrixNorm(x, xk, n) > eps);
 
+	delete[] xk;
+	delete[] zk;
+	delete[] rk;
+	delete[] r;
+	delete[] z;
+
 	return x;
 }

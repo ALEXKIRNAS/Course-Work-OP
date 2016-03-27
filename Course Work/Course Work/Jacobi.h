@@ -3,3 +3,4 @@ void deleteDiagZero(double**, const int&); // Прототим функції, що видає матрицю
 bool isSolution(double**, const int&); // Протопип функції, що перевіряє на сходимість метод Якобі
 double* Jacobi(double**, double*, const int&); // Прототип функції вирішення СЛАР методом Якобі
 double matrixNorm(double*, double*, const int&); // Прототип функції обчислення норми масиву
+void stableMatrix(double**, const int&); // Прототип функції, що стабілізує матрицю
