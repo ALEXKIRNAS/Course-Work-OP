@@ -1,6 +1,7 @@
 #include "DetermineCalc.h"
 #include "Jacobi.h"
 #include "Gauss–Seidel.h"
+#include "GradientDescent.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -43,6 +44,15 @@ int main(void) {
 		for (int i = 0; i < n; i++)
 			printf("Solution: %Lf ", x[i]);
 	}
+
+	printf("\n\nDesent:\n");
+	if (isPositive(matrix, n) && isSemetric(matrix, n))
+	{
+		x = GradientDescent(matrix, free, n);
+		for (int i = 0; i < n; i++)
+			printf("Solution: %Lf ", x[i]);
+	}
+	else printf("No solution!");
 
 	clocks = clock() - clocks;
 	printf("\nRuntime: %d\n", clocks);

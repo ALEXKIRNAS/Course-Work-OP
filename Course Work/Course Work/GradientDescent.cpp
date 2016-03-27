@@ -58,63 +58,65 @@ bool isPositive(double** matrix, const int& n) {
 double* GradientDescent(double** matrix, double* free, const int& n) {
 	double *x = new double[n]; // Поточне рішення системи
 	double *xk = new double[n]; // Наступне наближення рішення
-	double *g = new double[n]; // Поточне значення градієнту
-	double *gk = new double[n]; // Наступне значення градієнту
-	double *d = new double[n]; // Поточне значення вектору напряку
-	double *dk = new double[n]; // Наступне значення вектору напрямку
-	double s; // Скалярний крок алгоритму
+	double *r = new double[n]; // Поточне значення незвязка
+	double *rk = new double[n]; // Наступне значення незвязки
+	double *z = new double[n]; // Поточне значення вектору напряку
+	double *zk = new double[n]; // Наступне значення вектору напрямку
 
 	// Задання початкових уточнень
-	for (int i = 0; i < n; i++) gk[i] = g[i] = d[i] = dk[i] = xk[i] = 0;
+	for (int i = 0; i < n; i++) {
+		xk[i] = 0;
+		rk[i] = free[i];
+		zk[i] = free[i];
+	}
 
 	do {
 
-		// Step ONE
+		// PreStep
 		for (int i = 0; i < n; i++) {
-			gk[i] = -free[i];
-			for (int z = 0; z<n; z++)
-				gk[i]+= x[z] * matrix[i][z];
+			x[i] = xk[i];
+			r[i] = rk[i];
+			z[i] = zk[i];
 		}
+
+		// Step ONE
+		double alpha = 0; // Скалярний крок градієнту
+		double p1 = 0; // Скалярний добуток векторів (r, r)
+		double p2 = 0; // Cкалярний добуток векторів (A*z, z)
+
+		for (int i = 0; i<n; i++) alpha += r[i] * r[i];
+		for (int i = 0; i<n; i++) {
+			double temp = 0;
+			for (int j = 0; j<n; j++) temp += matrix[i][j] * z[j];
+			p2 += temp*z[i];
+		}
+
+		alpha = p1 / p2;
 
 		// Step TWO
-		double scalar1 = 0; // Обчислення доботку векторів gk^T та gk
-		double scalar2 = 0;// Обчислення доботку векторів g^T та g
-		for (int i = 0; i<n; i++) {
-			scalar1 += gk[i] * gk[i];
-			scalar2 += g[i] * g[i];
-		}
-
-		// Обчислення наступного напрямку
-		double alpha = scalar1 / scalar2; //Обчислення коефіцієнту попереднього напрямку
-		for (int i = 0; i<n; i++) dk[i] = -gk[i] + alpha*d[i];
-
-		// Step Three
-		double scalar3 = 0; // Обчилення добутку векторів dk та gk
-		double scalar4 = 0; // Обчислення добутку dk^T * matrix * dk
-		double* c = new double[n]; // Тимчасовий вектор для збереження добутку dk^T * matrix
-
-		for (int i = 0; i < n; i++) scalar3 += dk[i] * gk[i];
-
-		for (int i = 0; i<n; i++) {
-			c[i] = 0;
-			for (int z = 0; z<n; z++) c[i] += dk[i] * matrix[i][z];
-		}
-
-		for (int i = 0; i<n; i++) scalar4 += c[i] * dk[i];
-
-		s = scalar3 / scalar4;
-
-		// Step Four
-		// Обчислення наступного наближення 
 		for (int i = 0; i<n; i++)
-			xk[i] = x[i] + s*dk[i];
+			xk[i] = x[i] + alpha * z[i];
 
-		// Post step
+		// Step THREE
 		for (int i = 0; i<n; i++) {
-			d[i] = dk[i];
-			g[i] = gk[i];
-			x[i] = xk[i];
+			double temp = 0;
+			for (int j = 0; j<n; j++) temp += matrix[i][j] * z[j];
+			temp *= alpha;
+			rk[i] = r[i] - temp;
 		}
+
+		// Step FOUR
+		double beta = 0; // Скалярна корекція напрямку
+		double p3 = 0; // Скалярний добуток (rk, rk)
+		double p4 = 0; // Скалярний добуток (r, r)
+
+		for (int i = 0; i<n; i++) {
+			p3 += rk[i] * rk[i];
+			p4 += r[i] * r[i];
+		}
+
+		// Step FIVE
+		for (int i = 0; i<n; i++) zk[i] = z[i] + beta*z[i];
 
 	} while (matrixNorm(x, xk, n) > eps);
 
