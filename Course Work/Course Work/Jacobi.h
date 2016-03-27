@@ -1,6 +1,6 @@
 #pragma once
 void deleteDiagZero(double**, const int&); // Прототим функції, що видає матрицю на головній діагоналі якої відсутні нулі
-bool isSolution(double**, const int&); // Протопип функції, що перевіряє на сходимість метод Якобі
+bool isSolution(double**, double*, const int&); // Протопип функції, що перевіряє на сходимість метод Якобі
 double* Jacobi(double**, double*, const int&); // Прототип функції вирішення СЛАР методом Якобі
 double matrixNorm(double*, double*, const int&); // Прототип функції обчислення норми масиву
-void stableMatrix(double**, const int&); // Прототип функції, що стабілізує матрицю
+void stableMatrix(double**, double*, const int&); // Прототип функції, що стабілізує матрицю

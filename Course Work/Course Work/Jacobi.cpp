@@ -45,13 +45,13 @@ void deleteDiagZero(double** matrix, const int& n) {
 *	free - стовпець в≥льних член≥в		  *
 *	n - розм≥рн≥сть матриц≥				  *
 ******************************************/
-bool isSolution(double** matrix, const int& n) {
+bool isSolution(double** matrix, double* free, const int& n) {
 	// якщо матриц€ —Ћј– вироджена
 	if (det(matrix, n) == 0) return false;
 
 	// «нищуЇмо д≥агонал≥ нул≥
 	//deleteDiagZero(matrix, n);
-	stableMatrix(matrix, n);
+	stableMatrix(matrix, free, n);
 
 	// ѕерев≥рка на сходим≥сть метода якоб≥
 	for (int i = 0; i < n; i++) {
@@ -125,11 +125,14 @@ double matrixNorm(double* X, double* TempX, const int& n) {
 *	ѕараметри:							  *
 *	matrix - матриц€ дл€ €коњ пот≥рбно	  *
 *		  обчислити нову матрицю		  *
+*	free - стовпець в≥льних член≥в		  *
 *	n - розм≥рн≥сть матриц≥				  *
 ******************************************/
-void stableMatrix(double** matrix, const int& n) {
+void stableMatrix(double** matrix, double* free, const int& n) {
 	int* mas = new int[n]; // ћасив €кий вказуЇ на €кому р€дку було зам≥чено д≥агональний перев≥с
 	for (int i = 0; i < n; i++) mas[i] = 0;
+
+	int count = 0; //  ≥льк≥сть д≥агональних елемент≥в
 
 	for (int i = 0; i < n; i++) {
 		double sum = 0;
@@ -144,12 +147,29 @@ void stableMatrix(double** matrix, const int& n) {
 				delete[] mas;
 				return;
 			}
-			else mas[index] = i + 1;
+			else {
+				mas[index] = i + 1;
+				count++;
+			}
 	}
 
-	double** nMatrix = new double*[n];
-	for (int i = 0; i < n; i++) nMatrix[i] = matrix[mas[i] - 1];
-	
-	delete[] matrix;
-	matrix = nMatrix;
+	if (count < n) {
+		delete[] mas;
+		return;
+	}
+
+	double** temp = new double* [n];
+	double* value = new double[n];
+	for (int i = 0; i < n; i++) {
+		temp[i] = matrix[mas[i] - 1];
+		value[i] = free[mas[i] - 1];
+	}
+	for (int i = 0; i < n; i++) {
+		matrix[i] = temp[i];
+		free[i] = value[i];
+	}
+
+	delete[] temp;
+	delete[] mas;
+	delete[] value;
 }

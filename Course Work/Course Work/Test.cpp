@@ -29,7 +29,7 @@ int main(void) {
 	printf("Determine: %Lf\n", det(matrix, n));
 
 	printf("Jakibi method:\n");
-	if (isSolution(matrix, n) == false) printf("No solution!");
+	if (isSolution(matrix, free, n) == false) printf("No solution!");
 	else {
 		x = Jacobi(matrix, free, n);
 		for (int i = 0; i < n; i++)
@@ -38,7 +38,7 @@ int main(void) {
 	
 
 	printf("\n\nGauss-Seidel method:\n");
-	if (isSolution(matrix, n) == false && !(isPositive(matrix, n) && isSemetric(matrix, n)) ) printf("No solution!");
+	if (isSolution(matrix, free, n) == false && !(isPositive(matrix, n) && isSemetric(matrix, n)) ) printf("No solution!");
 	else {
 		x = GaussSeidel(matrix, free, n);
 		for (int i = 0; i < n; i++)
