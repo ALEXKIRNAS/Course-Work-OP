@@ -112,7 +112,7 @@ double* Jacobi(double** matrix, double* free, const int& n) {
 double matrixNorm(double* X, double* TempX, const int& n) {
 	double norm = abs(X[0] - TempX[0]);
 	for (int i = 0; i < n; i++)
-		if (abs(X[i] - TempX[i]) > norm) norm = abs(X[0] - TempX[0]);
+		if (abs(X[i] - TempX[i]) > norm) norm = abs(X[i] - TempX[i]);
 
 	return norm;
 }

@@ -10,7 +10,7 @@
 extern const double eps = 1e-5; // Наближення з яким шукаються корні
 
 int main(void) {
-	//freopen("input.txt", "r", stdin);
+	freopen("input.txt", "r", stdin);
 	int n;
 
 	scanf("%d", &n);
@@ -38,7 +38,7 @@ int main(void) {
 	
 
 	printf("\n\nGauss-Seidel method:\n");
-	if (isSolution(matrix, n) == false) printf("No solution!");
+	if (isSolution(matrix, n) == false && !(isPositive(matrix, n) && isSemetric(matrix, n)) ) printf("No solution!");
 	else {
 		x = GaussSeidel(matrix, free, n);
 		for (int i = 0; i < n; i++)
