@@ -15,9 +15,9 @@ namespace Graphic_alpha {
 	public ref class Graph : public System::Windows::Forms::Form
 	{
 	public:
-		Graph(void)
+		Graph(double* x, double* free, double** matrix)
 		{
-			InitializeComponent();
+			InitializeComponent(x, free, matrix);
 		}
 
 	protected:
@@ -49,7 +49,7 @@ namespace Graphic_alpha {
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		void InitializeComponent(void)
+		void InitializeComponent(double* x, double* free, double** matrix)
 		{
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
 			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
@@ -63,6 +63,19 @@ namespace Graphic_alpha {
 			// 
 			chartArea1->Name = L"ChartArea1";
 			this->GraphChart->ChartAreas->Add(chartArea1);
+
+			chartArea1->AxisX->ScaleView->Zoom(x[0]-10, x[0]+10);
+			chartArea1->CursorX->IsUserEnabled = true;
+			chartArea1->CursorX->IsUserSelectionEnabled = true;
+			chartArea1->AxisX->ScaleView->Zoomable = true;
+			chartArea1->AxisX->ScrollBar->IsPositionedInside = true;
+
+			chartArea1->AxisY->ScaleView->Zoom(x[1]-10, x[1]+10);
+			chartArea1->CursorY->IsUserEnabled = true;
+			chartArea1->CursorY->IsUserSelectionEnabled = true;
+			chartArea1->AxisY->ScaleView->Zoomable = true;
+			chartArea1->AxisY->ScrollBar->IsPositionedInside = true;
+
 			legend1->Name = L"Legend1";
 			this->GraphChart->Legends->Add(legend1);
 			this->GraphChart->Location = System::Drawing::Point(0, 1);
@@ -79,7 +92,14 @@ namespace Graphic_alpha {
 			series2->Name = L"Series2";
 			this->GraphChart->Series->Add(series1);
 			this->GraphChart->Series->Add(series2);
-			this->GraphChart->Size = System::Drawing::Size(377, 245);
+
+			for (double i = x[0] - 10; i <= x[0] + 10; i+=0.1)
+				series1->Points->AddXY(i, (free[0] - matrix[0][0] * i) / matrix[0][1]);
+
+			for (double i = x[0] - 10; i <= x[0] + 10; i += 0.1)
+				series2->Points->AddXY(i, (free[1] - matrix[1][0] * i) / matrix[1][1]);
+
+			this->GraphChart->Size = System::Drawing::Size(800, 600);
 			this->GraphChart->TabIndex = 0;
 			this->GraphChart->Text = L"chart1";
 			// 
@@ -87,7 +107,7 @@ namespace Graphic_alpha {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(379, 247);
+			this->ClientSize = System::Drawing::Size(800, 600);
 			this->Controls->Add(this->GraphChart);
 			this->Name = L"Graph";
 			this->Text = L"Graph";
@@ -96,10 +116,6 @@ namespace Graphic_alpha {
 
 		}
 #pragma endregion
-
-	public: void Build(void) {
-		
-	}
 
 	};
 }

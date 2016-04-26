@@ -388,7 +388,7 @@ namespace Graphic_alpha {
 			x = Jacobi(Matrix, Free, size);
 		}
 		else if (Seidel_ch->Checked == true) {
-			if (isSolution(Matrix, Free, size) == false || !(isPositive(Matrix, size) && isSemetric(Matrix, size))) {
+			if (isSolution(Matrix, Free, size) == false || (!isPositive(Matrix, size) && isSemetric(Matrix, size))) {
 				OutputInfo->Text = "Для даної матриці метод не сходиться.";
 				return;
 			}
@@ -409,7 +409,7 @@ namespace Graphic_alpha {
 		solution->AutoResizeColumns();
 
 		if (size == 2) {
-			Graph^ Form = gcnew Graph();
+			Graph^ Form = gcnew Graph(x, Free, Matrix);
 			Form->Show();
 		}
 
