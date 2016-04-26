@@ -409,7 +409,7 @@ namespace Graphic_alpha {
 		solution->AutoResizeColumns();
 
 		if (size == 2) {
-			Graph^ Form = gcnew Graph();
+			Graph^ Form = gcnew Graph(x, Free, Matrix);
 			Form->Show();
 		}
 
