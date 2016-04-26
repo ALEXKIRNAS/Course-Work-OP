@@ -98,7 +98,7 @@ namespace Graphic_alpha {
 #pragma endregion
 
 	public: void Build(void) {
-		GraphChart->ChartAreas->
+		
 	}
 
 	};
