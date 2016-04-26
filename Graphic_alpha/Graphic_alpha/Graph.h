@@ -96,10 +96,10 @@ namespace Graphic_alpha {
 			for (double i = x[0] - 10; i <= x[0] + 10; i+=0.1)
 				series1->Points->AddXY(i, (free[0] - matrix[0][0] * i) / matrix[0][1]);
 
-			for (double i = x[1] - 10; i <= x[1] + 10; i += 0.1)
+			for (double i = x[0] - 10; i <= x[0] + 10; i += 0.1)
 				series2->Points->AddXY(i, (free[1] - matrix[1][0] * i) / matrix[1][1]);
 
-			this->GraphChart->Size = System::Drawing::Size(377, 245);
+			this->GraphChart->Size = System::Drawing::Size(800, 600);
 			this->GraphChart->TabIndex = 0;
 			this->GraphChart->Text = L"chart1";
 			// 
@@ -107,7 +107,7 @@ namespace Graphic_alpha {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(379, 247);
+			this->ClientSize = System::Drawing::Size(800, 600);
 			this->Controls->Add(this->GraphChart);
 			this->Name = L"Graph";
 			this->Text = L"Graph";
