@@ -24,12 +24,24 @@
     <ClCompile Include="Jacobi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Gauss–Seidel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GradientDescent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Jacobi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gauss–Seidel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GradientDescent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

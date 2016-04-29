@@ -10,11 +10,12 @@ using namespace utilities;
 *			 порахувати визначник		  *
 *	size - розмірність матриці			  *
 ******************************************/
-double utilities::det(const double** matrix, const int& size) {
+double utilities::det(double** matrix, const int& size) {
+	//ЯКЩО розмірність матриці одинична, ТО повернути визначник матриці 1х1
 	if (size == 1)  return **matrix;
 	else {
 		// Обчислення визначника матриці розкладом за першим стовпцем
-		double detRes = 0;
+		double detRes = 0; // Визначник поточної матриці
 		for (int i = 0; i < size; i++) detRes += AlgebralAdditionCalc(matrix, size, i) * matrix[i][0];
 		return detRes;
 	}
@@ -25,20 +26,21 @@ double utilities::det(const double** matrix, const int& size) {
 *		(N-1)-го порядку				  *
 *	Параметри:							  *
 *	matrix - матриця для якої потірбно	  *
-*		  алгебраїний мінор				  *
+*		     знайт мінор				  *
 *	size - розмірність матриці			  *
 *	y - номер рядка елемента, для		  *
 *		якого потрібно порахувати		  *
-*		алгебраїний мінор				  *
+*	    мінор							  *
 ******************************************/
-double** utilities::matrixCut(const double** matrix, const int& size, const int& y) {
-	int x = 0;
+double** utilities::matrixCut(double** matrix, const int& size, const int& y) {
 	int elementCount = 0; // Кількість елементів в утвореній матриці
+	// Cтворюємо нову матрицю
 	double** newMatrix = CreateMatrix(size - 1);
-	
+
+	// Заповнюємо матрицю
 	for (int i = 0; i < size; i++)
-		for (int z = 0; z < size; z++)
-			if (i != x && z != y) {
+		for (int z = 1; z < size; z++)
+			if (i != y) {
 				newMatrix[elementCount / (size - 1)][elementCount % (size - 1)] = matrix[i][z];
 				elementCount++;
 			}
@@ -51,15 +53,15 @@ double** utilities::matrixCut(const double** matrix, const int& size, const int&
 *		доповнення заданого елементу	  *
 *	Параметри:							  *
 *	matrix - матриця для якої потірбно	  *
-*		  алгебраїний мінор				  *
+*		  знайти алгебраїчне доповнення	  *
 *	size - розмірність матриці			  *
 *	y - номер рядка елемента, для		  *
 *		якого потрібно порахувати		  *
 *		алгебраїний мінор				  *
 ******************************************/
-double utilities::AlgebralAdditionCalc(const double** matrix, const int& size, const int& y) {
+double utilities::AlgebralAdditionCalc(double** matrix, const int& size, const int& y) {
 	double** newMatrix = matrixCut(matrix, size, y);
-	double result = det(matrix, size) * (y & 1 ? -1 : 1);
+	double result = det(newMatrix, size-1) * (y & 1 ? -1 : 1); // Алгебраїчне доповнення
 
 	freeMatrix(newMatrix, size - 1);
 	return result;
@@ -88,7 +90,7 @@ double utilities::normCalc(double* x, double* xk, const int& size) {
 *	sols - система лінійних алгебраїчних  *
 *		   рівнянь						  *
 ******************************************/
-bool utilities::isSemetric(const utilities::system& sols) {
+bool utilities::isSemetric(const system& sols) {
 	for (int i = 0; i < sols.size; i++)
 		for (int z = i; z < sols.size; z++)
 			if (sols.matrix[i][z] != sols.matrix[z][i]) return false;
@@ -102,10 +104,12 @@ bool utilities::isSemetric(const utilities::system& sols) {
 *	sols - система лінійних алгебраїчних  *
 *		   рівнянь						  *
 ******************************************/
-bool utilities::isPositive(const utilities::system& sols) {
+bool utilities::isPositive(const system& sols) {
 	// Користуємося критерієм Сильвестра
 	for (int i = 1; i <= sols.size; i++) {
 		double** newMatrix = cornerMinor(sols, i);
+
+		// Якщо визначник кутового мінору не є додатньою, то матриця не є додатньовизначеною
 		if (det(newMatrix, i) <= 0) return false;
 		freeMatrix(newMatrix, i);
 	}
@@ -121,7 +125,7 @@ bool utilities::isPositive(const utilities::system& sols) {
 *		   рівнянь						  *
 *	size - розмірність кутового мінору	  *
 ******************************************/
-double** utilities::cornerMinor(const utilities::system& sols, int size) {
+double** utilities::cornerMinor(const system& sols, int size) {
 	double** newMatrix = CreateMatrix(size);
 	for (int i = 0; i < size; i++)
 		for (int z = 0; z < size; z++)
@@ -135,7 +139,7 @@ double** utilities::cornerMinor(const utilities::system& sols, int size) {
 *	Параметри:							  *
 *	sols - система лінійних алгебраїчних  *
 *		   рівнянь						  *
-*	mas - вектор, на який множить СЛАР	  *
+*	mas - вектор, на який множиться СЛАР  *
 ******************************************/
 double* utilities::matrixMult(const system& sols, double* mas) {
 	double* newVector = CreateMas(sols.size);
@@ -190,12 +194,17 @@ void utilities::stableSystem(system& sols) {
 	}
 
 	system newSols;
+	newSols.size = sols.size;
+	newSols.matrix = CreateMatrix(sols.size);
+	newSols.free = CreateMas(sols.size);
+
 	for (int i = 0; i < sols.size; i++) {
-		newSols.size = sols.size;
 		newSols.free[i] = sols.free[mas[i]];
-		for (int z = 0; z < sols.size; z++)
-			newSols.matrix[i][z] = sols.matrix[mas[i]][z];
+		for (int z = 0; z < sols.size; z++) newSols.matrix[i][z] = sols.matrix[mas[i]][z];
 	}
+
+	freeMatrix(sols.matrix, sols.size);
+	freeMas(sols.free);
 
 	sols = newSols;
 	delete[] mas;
@@ -211,7 +220,7 @@ void utilities::stableSystem(system& sols) {
 *	size - кількість елементів в рядку	  *
 ******************************************/
 int utilities::indexOfMaxElement(double* mas, const int& size) {
-	int index = 0;
+	int index = 0; // Індекс максимального елементу
 	for (int i = 1; i < size; i++) if (abs(mas[i]) >  abs(mas[index])) index = i;
 	return index;
 }
@@ -226,7 +235,7 @@ int utilities::indexOfMaxElement(double* mas, const int& size) {
 *	size - кількість елементів в рядку	  *
 ******************************************/
 double utilities::lineSumElemtnt(double* mas, const int& size) {
-	double sum = 0;
+	double sum = 0; // Сума елементів
 	for (int i = 0; i < size; i++) sum += mas[i];
 	return sum;
 }
@@ -284,13 +293,14 @@ double* utilities::CreateMas(int size) {
 }
 
 /******************************************
-*		Функція видалення матриці		  *
+*		Функція видалення масиву		  *
 *	Параметри:							  *
 *	mas - масив, який необхідно			  *
 *			 видалити					  *
 ******************************************/
 void utilities::freeMas(double* & mas) {
 	delete[] mas;
+	mas = nullptr;
 }
 
 /******************************************

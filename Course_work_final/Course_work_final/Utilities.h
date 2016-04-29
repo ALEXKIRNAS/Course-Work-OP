@@ -11,9 +11,9 @@ namespace utilities {
 	};
 
 
-	double det(const double**, const int&); // Прототип функції обчислення визначника
-	double** matrixCut(const double**, const int&, const int&); // Прототип функції уворення матриці(N - 1) - го порядку
-	double AlgebralAdditionCalc(const double**, const int&, const int&); // Прототип функції обчислення алгебраїного доповнення заданого елементу
+	double det(double**, const int&); // Прототип функції обчислення визначника
+	double** matrixCut(double**, const int&, const int&); // Прототип функції уворення матриці(N - 1) - го порядку
+	double AlgebralAdditionCalc(double**, const int&, const int&); // Прототип функції обчислення алгебраїного доповнення заданого елементу
 	double normCalc(double*, double*, const int&); // Прототип функції обчислення норми поточного рішення
 	bool isSemetric(const system&); // Прототип функції превірки матриці системи на симетричність
 	bool isPositive(const system&); // Прототип функції превірки матриці системи на додатньовизначеність
@@ -23,10 +23,10 @@ namespace utilities {
 	void stableSystem(system&); // Прототип функції приведння матриці системи до канонічного вигляду
 	int indexOfMaxElement(double*, const int&);  // Прототип функції знаходження індекса максимального елементу в рядку
 	double lineSumElemtnt(double*, const int&);  // Прототип функції знаходження суми елементів в рядку
-	bool isDiagDominate(const system&); // Прототип функції перевірки матриці системи на діагональний первіс
+	bool isDiagDominate(const system&); // Прототип функції перевірки матриці системи на діагональний перевіс
 	double** CreateMatrix(int); // Прототип функції виділення памяті під матрицю
 	void freeMatrix(double** &, int); // Прототип функції видалення матриці з памяті
 	double* CreateMas(int); // Прототип функції виділення памяті під масив
 	void freeMas(double* &); // Прототип функції видалення масиву з памяті
-	void masCopy(double*, double*, int&); // Прототип функції коміювання масиву
+	void masCopy(double*, double*, int&); // Прототип функції копіювання масиву
 };
