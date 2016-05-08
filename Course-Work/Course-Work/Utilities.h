@@ -22,7 +22,7 @@ namespace utilities {
 	double scalarMult(double*, double*, int&); // Прототип функції скалярного добутку векторів
 	void stableSystem(system&); // Прототип функції приведння матриці системи до канонічного вигляду
 	int indexOfMaxElement(double*, const int&);  // Прототип функції знаходження індекса максимального елементу в рядку
-	double lineSumElemtnt(double*, const int&);  // Прототип функції знаходження суми елементів в рядку
+	double lineSumElement(double*, const int&);  // Прототип функції знаходження суми елементів в рядку
 	bool isDiagDominate(const system&); // Прототип функції перевірки матриці системи на діагональний перевіс
 	double** CreateMatrix(int); // Прототип функції виділення памяті під матрицю
 	void freeMatrix(double** &, int); // Прототип функції видалення матриці з памяті

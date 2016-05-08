@@ -150,6 +150,9 @@ namespace CourseWork {
 			this->dataMatrix->RowHeadersVisible = false;
 			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataMatrix->RowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->dataMatrix->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->dataMatrix->Size = System::Drawing::Size(300, 303);
@@ -174,6 +177,9 @@ namespace CourseWork {
 			this->dataFree->RowHeadersVisible = false;
 			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataFree->RowsDefaultCellStyle = dataGridViewCellStyle3;
 			this->dataFree->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->dataFree->Size = System::Drawing::Size(60, 303);
@@ -198,6 +204,9 @@ namespace CourseWork {
 			this->dataRes->RowHeadersVisible = false;
 			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataRes->RowsDefaultCellStyle = dataGridViewCellStyle4;
 			this->dataRes->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->dataRes->Size = System::Drawing::Size(90, 303);

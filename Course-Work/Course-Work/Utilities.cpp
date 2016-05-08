@@ -178,9 +178,9 @@ void utilities::stableSystem(system& sols) {
 
 	for (int i = 0; i < sols.size; i++) {
 		int index = indexOfMaxElement(sols.matrix[i], sols.size);
-		double sum = lineSumElemtnt(sols.matrix[i], sols.size);
+		double sum = lineSumElement(sols.matrix[i], sols.size);
 
-		if (sum >= 2 * sols.matrix[i][index]) {
+		if (sum >= abs(2 * sols.matrix[i][index])) {
 			delete[] mas;
 			return;
 		}
@@ -234,9 +234,9 @@ int utilities::indexOfMaxElement(double* mas, const int& size) {
 *	mas - поточний рядок				  *
 *	size - кількість елементів в рядку	  *
 ******************************************/
-double utilities::lineSumElemtnt(double* mas, const int& size) {
+double utilities::lineSumElement(double* mas, const int& size) {
 	double sum = 0; // Сума елементів
-	for (int i = 0; i < size; i++) sum += mas[i];
+	for (int i = 0; i < size; i++) sum += abs(mas[i]);
 	return sum;
 }
 
@@ -249,7 +249,7 @@ double utilities::lineSumElemtnt(double* mas, const int& size) {
 ******************************************/
 bool utilities::isDiagDominate(const system& sols) {
 	for (int i = 0; i < sols.size; i++) {
-		double sum = lineSumElemtnt(sols.matrix[i], sols.size);
+		double sum = lineSumElement(sols.matrix[i], sols.size);
 		if (sum >= abs(2 * sols.matrix[i][i])) return false;
 	}
 	return true;
