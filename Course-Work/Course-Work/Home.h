@@ -378,16 +378,35 @@ namespace CourseWork {
 
 		}
 #pragma endregion
+
+/******************************************
+*	Функція виведення результату		  *
+*	роботи програми у поле результату	  *
+*	Параметри:							  *
+*	х -  результат виконання програми	  *
+******************************************/
 private: void print(double* x) {
 	int size = Convert::ToInt32(solsSize->Value);
 	for (int i = 0; i < size; i++) dataRes->Rows[i]->Cells[0]->Value = Convert::ToString(round(x[i]*presision)/ presision);
 }
+
+/******************************************
+*	Функція читання СЛАР				  *
+*	Параметри:							  *
+*	sols - система лінійних алгебраїчних  *
+*		   рівнянь						  *
+******************************************/
 private: void DataRead(utilities::system& sols) {
 	bool flag = false;
 	for (int i = 0; i < sols.size; i++)
 		for (int z = 0; z < sols.size; z++) sols.matrix[i][z] = Convert::ToDouble(dataMatrix->Rows[i]->Cells[z]->Value);
 	for (int i = 0; i < sols.size; i++) sols.free[i] = Convert::ToDouble(dataFree->Rows[i]->Cells[0]->Value);
 }
+
+/******************************************
+*		Функція перевірки вхідних		  *
+*		даних на валідність				  *
+******************************************/
 private: bool DataRead() {
 	int size = Convert::ToInt32(solsSize->Value);
 	bool flag = false;
@@ -419,6 +438,12 @@ private: bool DataRead() {
 	}
 	return flag;
 }
+
+/******************************************
+*		Функція зміни розмірів матриці	  *
+*		системи,стовпця вільних членів	  * 
+*		та вектора відповіді			  *
+******************************************/
 private: System::Void Resize() {
 	int size = Convert::ToInt32(solsSize->Value);
 
@@ -440,6 +465,12 @@ private: System::Void Resize() {
 	dataRes->Columns[0]->Width = 90;
 
 }
+
+/******************************************
+*		Функція очищастки вмісту матриці  *
+*		системи, стовпця вільних членів   *
+*		та вектора відповіді			  *
+******************************************/
 private: System::Void Clear() {
 	int size = Convert::ToInt32(solsSize->Value);
 	for (int i = 0; i < size; i++)
@@ -457,10 +488,26 @@ private: System::Void Clear() {
 	utilities::freeMatrix(sols.matrix, size);
 	utilities::freeMas(sols.free);
 }
+
+/******************************************
+*	Функція обробкт події загрузки		  *
+*	вікна програми						  *
+*	Параметри:							  *
+*	Посилання на відправника, додаткові   *
+*	аргументи виклику					  *
+******************************************/
 private: System::Void Home_Load(System::Object^  sender, System::EventArgs^  e) {
 	Resize();
 	Clear();
 }
+
+/******************************************
+*	Функція обробки події змінення		  *
+*	розміру системи						  *
+*	Параметри:							  *
+*	Посилання на відправника, додаткові   *
+*	аргументи виклику					  *
+******************************************/
 private: System::Void solsSize_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
 	int size = Convert::ToInt32(solsSize->Value);
 	int old_size = dataFree->RowCount;
@@ -474,9 +521,25 @@ private: System::Void solsSize_ValueChanged(System::Object^  sender, System::Eve
 		for (int z = old_size; z < size; z++) dataFree->Rows[z]->Cells[0]->Value = "0";
 	}
 }
+
+/******************************************
+*	Функція обробка події натискання	  *
+*	кнопки «Очистити вміст»				  *
+*	Параметри:							  *
+*	Посилання на відправника, додаткові   *
+*	аргументи виклику					  *
+******************************************/
 private: System::Void BClear_Click(System::Object^  sender, System::EventArgs^  e) {
 	Clear();
 }
+
+/******************************************
+*	Функція обробка події зміни вмісту	  *
+*	матриці системи						  *
+*	Параметри:							  *
+*	Посилання на відправника, додаткові   *
+*	аргументи виклику					  *
+******************************************/
 private: System::Void dataMatrix_CellEndEdit(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
 	int size = Convert::ToInt32(solsSize->Value);
 	Info->Text = "";
@@ -487,6 +550,14 @@ private: System::Void dataMatrix_CellEndEdit(System::Object^  sender, System::Wi
 	else BSolve->Enabled = true;
 		
 }
+
+/******************************************
+*	Функція обробка події зміни вмісту	  *
+*	стовпця вільних членів				  *
+*	Параметри:							  *
+*	Посилання на відправника, додаткові   *
+*	аргументи виклику					  *
+******************************************/
 private: System::Void dataFree_CellEndEdit(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
 	int size = Convert::ToInt32(solsSize->Value);
 	Info->Text = "";
@@ -497,6 +568,14 @@ private: System::Void dataFree_CellEndEdit(System::Object^  sender, System::Wind
 	else BSolve->Enabled = true;
 
 }
+
+/******************************************
+*	Функція обробки події натискання	  *
+*	кнопки «Знайти рішення»				  *
+*	Параметри:							  *
+*	Посилання на відправника, додаткові   *
+*	аргументи виклику					  *
+******************************************/
 private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  e) {
 	Info->Text = "";
 	int size = Convert::ToInt32(solsSize->Value);
