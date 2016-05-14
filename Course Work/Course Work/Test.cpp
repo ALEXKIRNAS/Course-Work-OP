@@ -6,11 +6,17 @@
 #include <time.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <Windows.h>
+#include <iostream>
+using namespace std;
 
 extern const double eps = 1e-5; // Наближення з яким шукаються корні
 
 int main(void) {
+	DWORD startTime = GetTickCount();
+
 	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
 	int n;
 
 	scanf("%d", &n);
@@ -24,36 +30,29 @@ int main(void) {
 	double* x;
 	for (int i = 0; i < n; i++) scanf("%Lf", &free[i]);
 
-	time_t clocks = clock();
+	//printf("Determine: %Lf\n", det(matrix, n));
 
-	printf("Determine: %Lf\n", det(matrix, n));
+	DWORD read = GetTickCount() - startTime;
 
+	startTime = GetTickCount();
 	printf("Jakibi method:\n");
-	if (isSolution(matrix, free, n) == false) printf("No solution!");
-	else {
-		x = Jacobi(matrix, free, n);
-		for (int i = 0; i < n; i++)
-			printf("Solution: %Lf ", x[i]);
-	}
-	
+	x = Jacobi(matrix, free, n);
+	startTime = GetTickCount() - startTime;
+	printf("Runtime: %d\n", startTime);
+	printf("Runtime with read: %I64d", startTime + read);
 
+
+	startTime = GetTickCount();
 	printf("\n\nGauss-Seidel method:\n");
-	if (isSolution(matrix, free, n) == false && !(isPositive(matrix, n) && isSemetric(matrix, n)) ) printf("No solution!");
-	else {
-		x = GaussSeidel(matrix, free, n);
-		for (int i = 0; i < n; i++)
-			printf("Solution: %Lf ", x[i]);
-	}
+	x = GaussSeidel(matrix, free, n);
+	startTime = GetTickCount() - startTime;
+	printf("Runtime: %d\n", startTime);
+	printf("Runtime with read: %I64d", startTime + read);
 
+	startTime = GetTickCount();
 	printf("\n\nDesent:\n");
-	if (isPositive(matrix, n) && isSemetric(matrix, n))
-	{
-		x = GradientDescent(matrix, free, n);
-		for (int i = 0; i < n; i++)
-			printf("Solution: %Lf ", x[i]);
-	}
-	else printf("No solution!");
-
-	clocks = clock() - clocks;
-	printf("\nRuntime: %d\n", clocks);
+	x = GradientDescent(matrix, free, n);
+	startTime = GetTickCount() - startTime;
+	printf("\nRuntime: %d\n", startTime);
+	printf("Runtime with read: %I64d", startTime + read);
 }

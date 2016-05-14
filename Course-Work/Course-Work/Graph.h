@@ -70,12 +70,12 @@ namespace CourseWork {
 			series1->ChartArea = L"ChartArea1";
 			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
 			series1->Legend = L"Legend1";
-			series1->LegendText = L"Система-1";
+			series1->LegendText = L"Рівняння-1";
 			series1->Name = L"Series1";
 			series2->ChartArea = L"ChartArea1";
 			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
 			series2->Legend = L"Legend1";
-			series2->LegendText = L"Система-2";
+			series2->LegendText = L"Рівняння-2";
 			series2->Name = L"Series2";
 			this->CGraph->Series->Add(series1);
 			this->CGraph->Series->Add(series2);

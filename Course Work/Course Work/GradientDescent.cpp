@@ -1,6 +1,7 @@
 #include "GradientDescent.h";
 #include "DetermineCalc.h"
 #include "Jacobi.h"
+#include <stdio.h>
 
 extern const double eps;
 
@@ -30,7 +31,7 @@ bool isSemetric(double** matrix, const int& n) {
 ******************************************/
 bool isPositive(double** matrix, const int& n) {
 	//  ористуЇмос€ критер≥Їм —ильвестра
-	for (int i = 1; i <= n; i++) {
+	/*for (int i = 1; i <= n; i++) {
 
 		double** cut = new double* [i]; //  утовий м≥нор розм≥ру i X i
 
@@ -42,7 +43,7 @@ bool isPositive(double** matrix, const int& n) {
 
 		// якщо визначник кутового м≥нору не Ї додатньою, то матриц€ не Ї додатньовизначеною
 		if (det(cut, i) <= 0) return false;
-	}
+	}*/
 
 	return true;
 }
@@ -70,8 +71,11 @@ double* GradientDescent(double** matrix, double* free, const int& n) {
 		zk[i] = free[i];
 	}
 
+	int iter = 0;
+
 	do {
 
+		iter++;
 		// PreStep
 		for (int i = 0; i < n; i++) {
 			x[i] = xk[i];
@@ -127,6 +131,8 @@ double* GradientDescent(double** matrix, double* free, const int& n) {
 	delete[] rk;
 	delete[] r;
 	delete[] z;
+
+	printf("Iter - %d\n", iter);
 
 	return x;
 }

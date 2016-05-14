@@ -5,6 +5,8 @@
 #include "GradientDescent.h"
 #include "Utilities.h"
 #include "Graph.h"
+#include <time.h>
+
 #define SIZE 300
 #define MSIZE 5
 #define presision 1000
@@ -549,6 +551,7 @@ private: System::Void dataMatrix_CellEndEdit(System::Object^  sender, System::Wi
 	}
 	else BSolve->Enabled = true;
 		
+	for (int i = 0; i < size; i++) dataRes->Rows[i]->Cells[0]->Value = "";
 }
 
 /******************************************
@@ -567,6 +570,7 @@ private: System::Void dataFree_CellEndEdit(System::Object^  sender, System::Wind
 	}
 	else BSolve->Enabled = true;
 
+	for (int i = 0; i < size; i++) dataRes->Rows[i]->Cells[0]->Value = "";
 }
 
 /******************************************
@@ -629,6 +633,28 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 		Graph^ form = gcnew Graph(sols, x);
 		form->Show();
 	}
+
+	time_t rawtime;
+	struct tm * timeinfo;
+	char buffer[200];
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	strftime(buffer, 200, "%d_%m_%Y_%H_%M_%S", timeinfo);
+
+	if (RJacobi->Checked) strcat(buffer, "_Jacobi.txt");
+	else if (RSeidel->Checked) strcat(buffer, "_Seidel.txt");
+	else strcat(buffer, "_GradientDescent.txt");
+
+	FILE* file = fopen(buffer, "wt");
+
+	if (file == nullptr) Info->Text = "Неможливо створити вихідний файл.";
+	else {
+		Info->Text = "Результат успішно записаний у вихідний файл.";
+		for (int i = 0; i < size; i++) fprintf(file, "%Lf\n", x[i]);
+	}
+	fclose(file);
 
 	utilities::freeMatrix(sols.matrix, size);
 	utilities::freeMas(sols.free);

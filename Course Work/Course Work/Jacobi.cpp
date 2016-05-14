@@ -47,7 +47,7 @@ void deleteDiagZero(double** matrix, const int& n) {
 ******************************************/
 bool isSolution(double** matrix, double* free, const int& n) {
 	// Якщо матриця СЛАР вироджена
-	if (det(matrix, n) == 0) return false;
+	//if (det(matrix, n) == 0) return false;
 
 	// Знищуємо діагоналі нулі
 	//deleteDiagZero(matrix, n);
