@@ -153,10 +153,9 @@ namespace CourseWork {
 			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataMatrix->RowsDefaultCellStyle = dataGridViewCellStyle2;
-			this->dataMatrix->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->dataMatrix->Size = System::Drawing::Size(300, 303);
 			this->dataMatrix->TabIndex = 2;
 			this->dataMatrix->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Home::dataMatrix_CellEndEdit);
@@ -180,10 +179,10 @@ namespace CourseWork {
 			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataFree->RowsDefaultCellStyle = dataGridViewCellStyle3;
-			this->dataFree->ScrollBars = System::Windows::Forms::ScrollBars::None;
+			this->dataFree->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->dataFree->Size = System::Drawing::Size(60, 303);
 			this->dataFree->TabIndex = 3;
 			this->dataFree->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Home::dataFree_CellEndEdit);
@@ -207,10 +206,10 @@ namespace CourseWork {
 			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataRes->RowsDefaultCellStyle = dataGridViewCellStyle4;
-			this->dataRes->ScrollBars = System::Windows::Forms::ScrollBars::None;
+			this->dataRes->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->dataRes->Size = System::Drawing::Size(90, 303);
 			this->dataRes->TabIndex = 4;
 			// 
@@ -455,8 +454,11 @@ private: System::Void Resize() {
 	dataFree->RowCount = size;
 	dataRes->ColumnCount = 1;
 	dataRes->RowCount = size;
+	dataMatrix->AutoResizeColumns();
+	dataFree->AutoResizeColumns();
+	dataRes->AutoResizeColumns();
 
-	int t = SIZE / size;
+	/*int t = SIZE / size;
 	for (int i = 0; i < size; i++) {
 		dataFree->Rows[i]->Height = t;
 		dataRes->Rows[i]->Height = t;
@@ -464,7 +466,7 @@ private: System::Void Resize() {
 		dataMatrix->Rows[i]->Height = t;	
 	}
 	dataFree->Columns[0]->Width = SIZE / MSIZE;
-	dataRes->Columns[0]->Width = 90;
+	dataRes->Columns[0]->Width = 90;*/
 
 }
 
@@ -546,6 +548,7 @@ private: System::Void BClear_Click(System::Object^  sender, System::EventArgs^  
 *	аргументи виклику					  *
 ******************************************/
 private: System::Void dataMatrix_CellEndEdit(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+	Resize();
 	int size = Convert::ToInt32(solsSize->Value);
 	Info->Text = "";
 	if (DataRead()) {
@@ -565,6 +568,7 @@ private: System::Void dataMatrix_CellEndEdit(System::Object^  sender, System::Wi
 *	аргументи виклику					  *
 ******************************************/
 private: System::Void dataFree_CellEndEdit(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+	Resize();
 	int size = Convert::ToInt32(solsSize->Value);
 	Info->Text = "";
 	if (DataRead()) {
@@ -672,6 +676,8 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 		for (int i = 0; i < size; i++) fprintf(file, "%Lf ", x[i]);
 	}
 	fclose(file);
+
+	Resize();
 
 	utilities::freeMatrix(sols.matrix, size);
 	utilities::freeMas(sols.free);
