@@ -70,12 +70,19 @@ namespace CourseWork {
 			series1->ChartArea = L"ChartArea1";
 			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
 			series1->Legend = L"Legend1";
+
+			
 			series1->LegendText = L"Рівняння-1";
+			series1->LegendText = sols.matrix[0][0] + " * x1 " + (sols.matrix[0][1] > 0 ? "+ " : "- ") + abs(sols.matrix[0][1]) + " * x2 " + (sols.free[0] > 0 ? "- " : "+ ") + abs(sols.free[0]);
+
 			series1->Name = L"Series1";
 			series2->ChartArea = L"ChartArea1";
 			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
 			series2->Legend = L"Legend1";
+
 			series2->LegendText = L"Рівняння-2";
+			series2->LegendText = sols.matrix[1][0] + " * x1 " + (sols.matrix[1][1] > 0 ? "+ " : "- ") + abs(sols.matrix[1][1]) + " * x2 " + (sols.free[1] > 0 ? "- " : "+ ") + abs(sols.free[1]);
+
 			series2->Name = L"Series2";
 			this->CGraph->Series->Add(series1);
 			this->CGraph->Series->Add(series2);
@@ -114,13 +121,13 @@ namespace CourseWork {
 			chartArea1->CursorX->IsUserEnabled = true;
 			chartArea1->CursorX->IsUserSelectionEnabled = true;
 			chartArea1->AxisX->ScaleView->Zoomable = true;
-			chartArea1->AxisX->Title = "X";
+			chartArea1->AxisX->Title = "X1";
 
 			chartArea1->AxisY->ScaleView->Zoom(yl, yr);
 			chartArea1->CursorY->IsUserEnabled = true;
 			chartArea1->CursorY->IsUserSelectionEnabled = true;
 			chartArea1->AxisY->ScaleView->Zoomable = true;
-			chartArea1->AxisY->Title = "Y";
+			chartArea1->AxisY->Title = "X2";
 
 			if(sols.matrix[0][1] != 0)
 				for (double i = xl; i <= xr; i += 0.1) series1->Points->AddXY(i, (sols.free[0] - sols.matrix[0][0] * i) / sols.matrix[0][1]);
@@ -131,5 +138,7 @@ namespace CourseWork {
 			else for (double i = yl; i <= yr; i += 0.1) series2->Points->AddXY(sols.free[1] / sols.matrix[1][0], i);
 		}
 #pragma endregion
-	};
+	private: System::Void Graph_Load(System::Object^  sender, System::EventArgs^  e) {
+	}
+};
 }

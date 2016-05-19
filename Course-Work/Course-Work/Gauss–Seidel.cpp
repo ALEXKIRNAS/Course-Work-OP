@@ -15,13 +15,23 @@ double* Seidel::Seidel(utilities::system& sols) {
 	for (int i = 0; i < sols.size; i++) xk[i] = 0;
 	double norm = 2 * utilities::eps;
 
+	int iter = 0;
+
 	while (norm >= utilities::eps) {
+		iter++;
 		utilities::masCopy(xk, x, sols.size);
 		nextSolution(sols, x, xk);
 		norm = utilities::normCalc(x, xk, sols.size);
 	}
 
-	delete[] x;
+	utilities::freeMas(x);
+	double* temp = new double[sols.size + 1];
+	utilities::masCopy(xk, temp, sols.size);
+	utilities::freeMas(xk);
+
+	temp[sols.size] = iter;
+
+	xk = temp;
 	return xk;
 }
 

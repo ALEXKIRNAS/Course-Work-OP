@@ -484,8 +484,11 @@ private: System::Void Clear() {
 	Info->Text = "";
 	utilities::system sols;
 	sols.size = size;
+
 	sols.matrix = utilities::CreateMatrix(size);
 	sols.free = utilities::CreateMas(size);
+	DataRead();
+	BSolve->Enabled = true;
 	DataRead(sols);
 	utilities::freeMatrix(sols.matrix, size);
 	utilities::freeMas(sols.free);
@@ -591,6 +594,7 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 	sols.free = utilities::CreateMas(size);
 
 	DataRead(sols);
+	int start = clock();
 
 	if (utilities::det(sols.matrix, sols.size) == 0) {
 		Info->Text = "Система вироджена (визначник системи рівний нулю).";
@@ -599,6 +603,7 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 		return;
 	}
 
+	int oper;
 	double* x;
 	if (RJacobi->Checked) {
 		if (!Jacobi::isSolved(sols)) {
@@ -608,6 +613,7 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 			return;
 		}
 		x = Jacobi::Jacobi(sols);
+		oper = x[sols.size] * (4 * (sols.size * sols.size + sols.size));
 	}
 	else if (RSeidel->Checked) {
 		if (!Seidel::isSolved(sols)) {
@@ -617,6 +623,7 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 			return;
 		}
 		x = Seidel::Seidel(sols);
+		oper = x[sols.size] * (3 * sols.size * sols.size + 4*sols.size);
 	}
 	else {
 		if (!GradientDescent::isSolved(sols)) {
@@ -626,7 +633,10 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 			return;
 		}
 		x = GradientDescent::GradientDescent(sols);
+		oper = x[sols.size] * (3 * sols.size * sols.size + 37 * sols.size);
 	}
+
+	Info->Text = "Рішення знайдено за " + (clock() - start) + " мілісекунди, "  + (int) x[sols.size] + " ітерацій, " + oper + " операцій" +"!";
 
 	print(x);
 	if (sols.size == 2) {
@@ -641,7 +651,7 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
 
-	strftime(buffer, 200, "%d_%m_%Y_%H_%M_%S", timeinfo);
+	strftime(buffer, 200, "%d.%m.%Y_%H.%M.%S", timeinfo);
 
 	if (RJacobi->Checked) strcat(buffer, "_Jacobi.txt");
 	else if (RSeidel->Checked) strcat(buffer, "_Seidel.txt");
@@ -651,8 +661,15 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 
 	if (file == nullptr) Info->Text = "Неможливо створити вихідний файл.";
 	else {
-		Info->Text = "Результат успішно записаний у вихідний файл.";
-		for (int i = 0; i < size; i++) fprintf(file, "%Lf\n", x[i]);
+		fprintf(file, "Size: %d\n", sols.size);
+		fprintf(file, "\nMatrix:\n");
+		for (int i = 0; i < sols.size; i++, fprintf(file, "\n"))
+			for (int z = 0; z < sols.size; z++)
+				fprintf(file, "%Lf ", sols.matrix[i][z]);
+		fprintf(file, "\nFree:\n");
+		for (int i = 0; i < sols.size; i++) fprintf(file, "%Lf ", sols.free[i]);
+		fprintf(file, "\n\nSolution:\n");
+		for (int i = 0; i < size; i++) fprintf(file, "%Lf ", x[i]);
 	}
 	fclose(file);
 

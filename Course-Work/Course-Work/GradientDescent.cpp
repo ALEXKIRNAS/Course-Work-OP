@@ -25,8 +25,11 @@ double* GradientDescent::GradientDescent(utilities::system& sols) {
 		zk[i] = sols.free[i];
 	}
 
+	int iter = 0;
+
 	double norm = 2 * utilities::eps;
 	while (norm >= utilities::eps) {
+		iter++; 
 
 		utilities::masCopy(xk, x, sols.size);
 		utilities::masCopy(rk, r, sols.size);
@@ -59,6 +62,13 @@ double* GradientDescent::GradientDescent(utilities::system& sols) {
 	utilities::freeMas(z);
 	utilities::freeMas(zk);
 
+	double* temp = new double[sols.size + 1];
+	utilities::masCopy(xk, temp, sols.size);
+	utilities::freeMas(xk);
+
+	temp[sols.size] = iter;
+
+	xk = temp;
 	return xk;
 }
 
