@@ -180,7 +180,7 @@ namespace CourseWork {
 			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataFree->RowsDefaultCellStyle = dataGridViewCellStyle3;
-			this->dataFree->Size = System::Drawing::Size(113, 205);
+			this->dataFree->Size = System::Drawing::Size(113, 203);
 			this->dataFree->TabIndex = 3;
 			this->dataFree->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Home::dataFree_CellEndEdit);
 			// 
@@ -205,7 +205,7 @@ namespace CourseWork {
 			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataRes->RowsDefaultCellStyle = dataGridViewCellStyle4;
-			this->dataRes->Size = System::Drawing::Size(107, 204);
+			this->dataRes->Size = System::Drawing::Size(107, 202);
 			this->dataRes->TabIndex = 4;
 			// 
 			// label2
@@ -556,6 +556,7 @@ private: System::Void solsSize_ValueChanged(System::Object^  sender, System::Eve
 ******************************************/
 private: System::Void BClear_Click(System::Object^  sender, System::EventArgs^  e) {
 	Clear();
+	Resize();
 }
 
 /******************************************

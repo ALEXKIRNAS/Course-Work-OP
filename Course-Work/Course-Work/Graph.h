@@ -87,7 +87,7 @@ namespace CourseWork {
 			series2->Name = L"Series2";
 			this->CGraph->Series->Add(series1);
 			this->CGraph->Series->Add(series2);
-			this->CGraph->Size = System::Drawing::Size(784, 562);
+			this->CGraph->Size = System::Drawing::Size(800, 600);
 			this->CGraph->TabIndex = 0;
 			this->CGraph->Text = L"chart1";
 			// 
@@ -95,12 +95,15 @@ namespace CourseWork {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(784, 562);
+			this->ClientSize = System::Drawing::Size(800, 600);
 			this->Controls->Add(this->CGraph);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"Graph";
 			this->Text = L"ֳנאפ³ך";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->CGraph))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
+			this->MaximizeBox = false;
 
 
 			double xl = round(x[0] - 10);
