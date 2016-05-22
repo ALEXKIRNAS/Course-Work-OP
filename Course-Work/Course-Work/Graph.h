@@ -1,6 +1,7 @@
 #pragma once
 #include "Utilities.h"
 #include <algorithm>
+#include <math.h>
 
 
 namespace CourseWork {
@@ -73,7 +74,7 @@ namespace CourseWork {
 
 			
 			series1->LegendText = L"Рівняння-1";
-			series1->LegendText = sols.matrix[0][0] + " * x1 " + (sols.matrix[0][1] > 0 ? "+ " : "- ") + abs(sols.matrix[0][1]) + " * x2 " + (sols.free[0] > 0 ? "- " : "+ ") + abs(sols.free[0]);
+			series1->LegendText = sols.matrix[0][0] + " * x1 " + (sols.matrix[0][1] >= 0 ? "+ " : "- ") + abs(sols.matrix[0][1]) + " * x2 " + (sols.free[0] >= 0 ? "- " : "+ ") + abs(sols.free[0]) + " = 0";
 
 			series1->Name = L"Series1";
 			series2->ChartArea = L"ChartArea1";
@@ -81,7 +82,7 @@ namespace CourseWork {
 			series2->Legend = L"Legend1";
 
 			series2->LegendText = L"Рівняння-2";
-			series2->LegendText = sols.matrix[1][0] + " * x1 " + (sols.matrix[1][1] > 0 ? "+ " : "- ") + abs(sols.matrix[1][1]) + " * x2 " + (sols.free[1] > 0 ? "- " : "+ ") + abs(sols.free[1]);
+			series2->LegendText = sols.matrix[1][0] + " * x1 " + (sols.matrix[1][1] >= 0 ? "+ " : "- ") + abs(sols.matrix[1][1]) + " * x2 " + (sols.free[1] >= 0 ? "- " : "+ ") + abs(sols.free[1]) + " = 0";
 
 			series2->Name = L"Series2";
 			this->CGraph->Series->Add(series1);
@@ -102,10 +103,10 @@ namespace CourseWork {
 			this->ResumeLayout(false);
 
 
-			double xl = x[0] - 10;
-			double xr = x[0] + 10;
-			double yl = x[1] - 10;
-			double yr = x[1] + 10;
+			double xl = round(x[0] - 10);
+			double xr = round(x[0] + 10);
+			double yl = round(x[1] - 10);
+			double yr = round(x[1] + 10);
 
 			if (sols.matrix[0][1] != 0) {
 				yl = std::min(yl, (sols.free[0] - sols.matrix[0][0] * xl) / sols.matrix[0][1]);
@@ -138,7 +139,5 @@ namespace CourseWork {
 			else for (double i = yl; i <= yr; i += 0.1) series2->Points->AddXY(sols.free[1] / sols.matrix[1][0], i);
 		}
 #pragma endregion
-	private: System::Void Graph_Load(System::Object^  sender, System::EventArgs^  e) {
-	}
 };
 }
