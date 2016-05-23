@@ -248,6 +248,7 @@ namespace CourseWork {
 			this->label4->TabIndex = 7;
 			this->label4->Text = L"Рішення системи";
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->label4->Click += gcnew System::EventHandler(this, &Home::label4_Click);
 			// 
 			// groupBox1
 			// 
@@ -717,6 +718,8 @@ private: System::Void BSolve_Click(System::Object^  sender, System::EventArgs^  
 	utilities::freeMatrix(sols.matrix, size);
 	utilities::freeMas(sols.free);
 	utilities::freeMas(x);
+}
+private: System::Void label4_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }
