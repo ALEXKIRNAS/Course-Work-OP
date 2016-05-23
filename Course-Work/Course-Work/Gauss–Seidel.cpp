@@ -44,7 +44,7 @@ double* Seidel::Seidel(utilities::system& sols) {
 ******************************************/
 bool Seidel::isSolved(utilities::system& sols) {
 	utilities::stableSystem(sols);
-	if (utilities::isDiagDominate(sols) || (utilities::isPositive(sols) && utilities::isSemetric(sols))) return true;
+	if (utilities::isDiagDominate(sols) || utilities::isPositive(sols) ) return true;
 	else return false;
 }
 
