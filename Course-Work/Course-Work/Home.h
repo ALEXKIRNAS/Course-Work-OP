@@ -109,12 +109,11 @@ namespace CourseWork {
 			// solsSize
 			// 
 			this->solsSize->InterceptArrowKeys = false;
-			this->solsSize->Location = System::Drawing::Point(25, 37);
-			this->solsSize->Margin = System::Windows::Forms::Padding(4);
-			this->solsSize->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
+			this->solsSize->Location = System::Drawing::Point(19, 30);
+			this->solsSize->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 8, 0, 0, 0 });
 			this->solsSize->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 2, 0, 0, 0 });
 			this->solsSize->Name = L"solsSize";
-			this->solsSize->Size = System::Drawing::Size(160, 22);
+			this->solsSize->Size = System::Drawing::Size(120, 20);
 			this->solsSize->TabIndex = 0;
 			this->solsSize->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 2, 0, 0, 0 });
 			this->solsSize->ValueChanged += gcnew System::EventHandler(this, &Home::solsSize_ValueChanged);
@@ -124,10 +123,9 @@ namespace CourseWork {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(21, 11);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(16, 9);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(152, 24);
+			this->label1->Size = System::Drawing::Size(119, 18);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Розмір системи";
 			// 
@@ -148,8 +146,7 @@ namespace CourseWork {
 			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::Color::Black;
 			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
 			this->dataMatrix->DefaultCellStyle = dataGridViewCellStyle1;
-			this->dataMatrix->Location = System::Drawing::Point(16, 134);
-			this->dataMatrix->Margin = System::Windows::Forms::Padding(4);
+			this->dataMatrix->Location = System::Drawing::Point(12, 109);
 			this->dataMatrix->MultiSelect = false;
 			this->dataMatrix->Name = L"dataMatrix";
 			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
@@ -158,7 +155,7 @@ namespace CourseWork {
 			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataMatrix->RowsDefaultCellStyle = dataGridViewCellStyle2;
-			this->dataMatrix->Size = System::Drawing::Size(400, 373);
+			this->dataMatrix->Size = System::Drawing::Size(270, 204);
 			this->dataMatrix->TabIndex = 2;
 			this->dataMatrix->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Home::dataMatrix_CellEndEdit);
 			// 
@@ -174,8 +171,7 @@ namespace CourseWork {
 			this->dataFree->BackgroundColor = System::Drawing::Color::WhiteSmoke;
 			this->dataFree->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataFree->ColumnHeadersVisible = false;
-			this->dataFree->Location = System::Drawing::Point(424, 134);
-			this->dataFree->Margin = System::Windows::Forms::Padding(4);
+			this->dataFree->Location = System::Drawing::Point(288, 110);
 			this->dataFree->MultiSelect = false;
 			this->dataFree->Name = L"dataFree";
 			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
@@ -184,7 +180,7 @@ namespace CourseWork {
 			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataFree->RowsDefaultCellStyle = dataGridViewCellStyle3;
-			this->dataFree->Size = System::Drawing::Size(169, 373);
+			this->dataFree->Size = System::Drawing::Size(113, 203);
 			this->dataFree->TabIndex = 3;
 			this->dataFree->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Home::dataFree_CellEndEdit);
 			// 
@@ -200,8 +196,7 @@ namespace CourseWork {
 			this->dataRes->BackgroundColor = System::Drawing::Color::WhiteSmoke;
 			this->dataRes->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataRes->ColumnHeadersVisible = false;
-			this->dataRes->Location = System::Drawing::Point(601, 134);
-			this->dataRes->Margin = System::Windows::Forms::Padding(4);
+			this->dataRes->Location = System::Drawing::Point(407, 111);
 			this->dataRes->Name = L"dataRes";
 			this->dataRes->ReadOnly = true;
 			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
@@ -210,17 +205,16 @@ namespace CourseWork {
 			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::DodgerBlue;
 			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::Color::Black;
 			this->dataRes->RowsDefaultCellStyle = dataGridViewCellStyle4;
-			this->dataRes->Size = System::Drawing::Size(151, 373);
+			this->dataRes->Size = System::Drawing::Size(107, 202);
 			this->dataRes->TabIndex = 4;
 			// 
 			// label2
 			// 
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(20, 100);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->Location = System::Drawing::Point(15, 81);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(396, 31);
+			this->label2->Size = System::Drawing::Size(267, 25);
 			this->label2->TabIndex = 5;
 			this->label2->Text = L"Матриця системи";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -229,10 +223,9 @@ namespace CourseWork {
 			// 
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label3->Location = System::Drawing::Point(420, 73);
-			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Location = System::Drawing::Point(285, 50);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(171, 57);
+			this->label3->Size = System::Drawing::Size(116, 57);
 			this->label3->TabIndex = 6;
 			this->label3->Text = L"Стовпець вільних членів";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -241,10 +234,9 @@ namespace CourseWork {
 			// 
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label4->Location = System::Drawing::Point(599, 78);
-			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->Location = System::Drawing::Point(407, 68);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(137, 47);
+			this->label4->Size = System::Drawing::Size(107, 38);
 			this->label4->TabIndex = 7;
 			this->label4->Text = L"Рішення системи";
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -257,11 +249,9 @@ namespace CourseWork {
 			this->groupBox1->Controls->Add(this->RJacobi);
 			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->groupBox1->Location = System::Drawing::Point(780, 150);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(4);
+			this->groupBox1->Location = System::Drawing::Point(520, 100);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(4);
-			this->groupBox1->Size = System::Drawing::Size(247, 134);
+			this->groupBox1->Size = System::Drawing::Size(185, 109);
 			this->groupBox1->TabIndex = 8;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Метод рішення";
@@ -271,10 +261,9 @@ namespace CourseWork {
 			this->rDesent->AutoSize = true;
 			this->rDesent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->rDesent->Location = System::Drawing::Point(21, 95);
-			this->rDesent->Margin = System::Windows::Forms::Padding(4);
+			this->rDesent->Location = System::Drawing::Point(16, 77);
 			this->rDesent->Name = L"rDesent";
-			this->rDesent->Size = System::Drawing::Size(215, 28);
+			this->rDesent->Size = System::Drawing::Size(168, 22);
 			this->rDesent->TabIndex = 2;
 			this->rDesent->TabStop = true;
 			this->rDesent->Text = L"Градієнтного спуску";
@@ -285,10 +274,9 @@ namespace CourseWork {
 			this->RSeidel->AutoSize = true;
 			this->RSeidel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->RSeidel->Location = System::Drawing::Point(21, 60);
-			this->RSeidel->Margin = System::Windows::Forms::Padding(4);
+			this->RSeidel->Location = System::Drawing::Point(16, 49);
 			this->RSeidel->Name = L"RSeidel";
-			this->RSeidel->Size = System::Drawing::Size(165, 28);
+			this->RSeidel->Size = System::Drawing::Size(131, 22);
 			this->RSeidel->TabIndex = 1;
 			this->RSeidel->TabStop = true;
 			this->RSeidel->Text = L"Гауса-Зейделя";
@@ -300,10 +288,9 @@ namespace CourseWork {
 			this->RJacobi->Checked = true;
 			this->RJacobi->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->RJacobi->Location = System::Drawing::Point(21, 26);
-			this->RJacobi->Margin = System::Windows::Forms::Padding(4);
+			this->RJacobi->Location = System::Drawing::Point(16, 21);
 			this->RJacobi->Name = L"RJacobi";
-			this->RJacobi->Size = System::Drawing::Size(81, 28);
+			this->RJacobi->Size = System::Drawing::Size(66, 22);
 			this->RJacobi->TabIndex = 0;
 			this->RJacobi->TabStop = true;
 			this->RJacobi->Text = L"Якобі";
@@ -313,11 +300,10 @@ namespace CourseWork {
 			// 
 			this->Info->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->Info->Location = System::Drawing::Point(16, 570);
-			this->Info->Margin = System::Windows::Forms::Padding(4);
+			this->Info->Location = System::Drawing::Point(12, 345);
 			this->Info->Name = L"Info";
 			this->Info->ReadOnly = true;
-			this->Info->Size = System::Drawing::Size(1008, 29);
+			this->Info->Size = System::Drawing::Size(693, 24);
 			this->Info->TabIndex = 9;
 			// 
 			// label5
@@ -325,10 +311,9 @@ namespace CourseWork {
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label5->Location = System::Drawing::Point(12, 544);
-			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Location = System::Drawing::Point(9, 324);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(203, 24);
+			this->label5->Size = System::Drawing::Size(160, 18);
 			this->label5->TabIndex = 10;
 			this->label5->Text = L"Системна інформація";
 			// 
@@ -336,10 +321,9 @@ namespace CourseWork {
 			// 
 			this->BSolve->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->BSolve->Location = System::Drawing::Point(780, 316);
-			this->BSolve->Margin = System::Windows::Forms::Padding(4);
+			this->BSolve->Location = System::Drawing::Point(520, 235);
 			this->BSolve->Name = L"BSolve";
-			this->BSolve->Size = System::Drawing::Size(247, 43);
+			this->BSolve->Size = System::Drawing::Size(185, 35);
 			this->BSolve->TabIndex = 11;
 			this->BSolve->Text = L"Знайти рішення";
 			this->BSolve->UseVisualStyleBackColor = true;
@@ -349,10 +333,9 @@ namespace CourseWork {
 			// 
 			this->BClear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->BClear->Location = System::Drawing::Point(780, 367);
-			this->BClear->Margin = System::Windows::Forms::Padding(4);
+			this->BClear->Location = System::Drawing::Point(520, 276);
 			this->BClear->Name = L"BClear";
-			this->BClear->Size = System::Drawing::Size(247, 43);
+			this->BClear->Size = System::Drawing::Size(185, 35);
 			this->BClear->TabIndex = 12;
 			this->BClear->Text = L"Очистити вміст";
 			this->BClear->UseVisualStyleBackColor = true;
@@ -360,9 +343,9 @@ namespace CourseWork {
 			// 
 			// Home
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1045, 612);
+			this->ClientSize = System::Drawing::Size(714, 376);
 			this->Controls->Add(this->BClear);
 			this->Controls->Add(this->BSolve);
 			this->Controls->Add(this->label5);
@@ -378,7 +361,6 @@ namespace CourseWork {
 			this->Controls->Add(this->solsSize);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->Name = L"Home";
 			this->Text = L"СЛАР";
@@ -476,6 +458,7 @@ private: System::Void Resize() {
 
 	for (int i = 0; i < size; i++) dataMatrix->Columns[i]->HeaderText = "a" + (i + 1);
 	for (int i = 0; i < size; i++) {
+		dataMatrix->Columns[i]->SortMode = DataGridViewColumnSortMode::NotSortable;
 		dataMatrix->Rows[i]->HeaderCell->Value = "a" + (i + 1);
 		dataFree->Rows[i]->HeaderCell->Value = "b" + (i + 1);
 		dataRes->Rows[i]->HeaderCell->Value = "x" + (i + 1);
@@ -574,6 +557,7 @@ private: System::Void solsSize_ValueChanged(System::Object^  sender, System::Eve
 ******************************************/
 private: System::Void BClear_Click(System::Object^  sender, System::EventArgs^  e) {
 	Clear();
+	Resize();
 }
 
 /******************************************
